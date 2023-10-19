@@ -42,8 +42,14 @@ cd app
 npm start
 http://localhost:5000/
 6) https://developers.sap.com/tutorials/hana-cloud-cap-add-authentication.html
-7) https://developers.sap.com/tutorials/hana-cloud-cap-calc-view.html
-8) https://developers.sap.com/tutorials/hana-cloud-cap-stored-proc.html
+   https://developers.sap.com/tutorials/hana-cloud-cap-deploy-mta.html
+cds compile srv/ --to xsuaa > xs-security.json
+cf create-service xsuaa application MyHANAApp-auth -c xs-security.json
+cf create-service-key MyHANAApp-auth default  
+cds bind -2 MyHANAApp-auth:default
+cds bind --exec -- npm start --prefix app
+1) https://developers.sap.com/tutorials/hana-cloud-cap-calc-view.html
+2) https://developers.sap.com/tutorials/hana-cloud-cap-stored-proc.html
 	  
 {"cds":{
   "requires": {
@@ -259,4 +265,20 @@ C:\MyHANAApp\app>npm start
 #2.0#2023 10 19 19:31:21:143#+09:00#WARNING#/Configuration#####lnx1kylz##########lnx1kylz#PLAIN##No authentication will be used when accessing backends. Scopes defined in routes will be ignored.#
 #2.0#2023 10 19 19:31:21:144#+09:00#INFO#/Configuration#####lnx1kylz##########lnx1kylz#PLAIN##Replacing $XSAPPNAME will not take place - 'xsappname' property not found in UAA configuration.#
 #2.0#2023 10 19 19:31:21:468#+09:00#INFO#/approuter#####lnx1kyli##########lnx1kyli#PLAIN##Application router is listening on port: 5000#
+~~~
+
+~~~
+
+C:\MyHANAApp>cds bind --exec -- npm start --prefix app
+resolving cloud service bindings...
+bound db to Cloud Foundry managed service MyHANAApp-db:MyHANAApp-db-key
+bound auth to Cloud Foundry managed service MyHANAApp-auth:default
+
+> start
+> node node_modules/@sap/approuter/approuter.js
+
+#2.0#2023 10 19 19:54:41:322#+09:00#WARNING#/LoggingLibrary################PLAIN##Dynamic log level switching not available#
+#2.0#2023 10 19 19:54:42:374#+09:00#INFO#/approuter#####lnx2ezt2##########lnx2ezt2#PLAIN##Application router version 14.3.3#
+#2.0#2023 10 19 19:54:42:381#+09:00#INFO#/Configuration#####lnx2ezt9##########lnx2ezt9#PLAIN##No COOKIES environment variable#
+#2.0#2023 10 19 19:54:42:459#+09:00#INFO#/approuter#####lnx2ezt2##########lnx2ezt2#PLAIN##Application router is listening on port: 5000#
 ~~~
