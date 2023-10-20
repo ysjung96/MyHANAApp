@@ -29,7 +29,8 @@
       ]
     },
     "requires": {
-      "db": "hana-cloud"
+      "db": "hana-cloud",
+      "auth": "xsuaa"
     }
   }
 }

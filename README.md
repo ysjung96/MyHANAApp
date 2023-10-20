@@ -39,6 +39,7 @@ cds watch --profile hybrid
 http://localhost:4004/
 5) https://developers.sap.com/tutorials/hana-cloud-cap-create-ui.html
 cd app
+npm install
 npm start
 http://localhost:5000/
 6) https://developers.sap.com/tutorials/hana-cloud-cap-add-authentication.html
@@ -62,6 +63,14 @@ cds bind --exec -- npm start --prefix app
 
 ## 배포
 ~~~
+npm install -g npm@10.2.1
+cds add hana,approuter,xsuaa --for production
+cds add mta
+cds add pipeline
+npm update --package-lock-only
+cds build --production
+npm i -g mbt
+mbt build -t gen --mtar mta.tar
 C:\MyHANAApp>cds deploy
 Starting deploy to SAP HANA ...
 Running build
